@@ -1,4 +1,6 @@
 abstract class MembershipPlan {
+    public static final double stawkaWat = 0.25;
+
     private String planCode;
     private String clientName;
     private int months;
@@ -6,13 +8,16 @@ abstract class MembershipPlan {
     private boolean autoRenew;
 
 
-    public MembershipPlan(String planCode, String clientName, int onths, double baseMonthlyFee, boolean autoRenew) {
+    public MembershipPlan(String planCode, String clientName, int months, double baseMonthlyFee, boolean autoRenew) {
         this.planCode = planCode;
         this.clientName = clientName;
         this.months = months;
         this.baseMonthlyFee = baseMonthlyFee;
         this.autoRenew = autoRenew;
     }
+
+    public abstract String getPlanType();
+
 
     public String getPlanCode() {
         return planCode;
@@ -34,16 +39,16 @@ abstract class MembershipPlan {
         return autoRenew;
     }
 
-    public abstract String getPlanType();
+
 
     public abstract double calculateMonthlyNetPrice();
 
     public double calculateMonthlyGrossPrice(){
-        return baseMonthlyFee ;
+        return this.calculateMonthlyNetPrice() * (1+stawkaWat) ;
     }
 
     double calculateTotalNetPrice() {
-        return calculateMonthlyNetPrice()*months;
+        return calculateMonthlyNetPrice()*this.getMonths();
     }
     public final void printSummary() {
         System.out.println("Plan Code: " + planCode);
@@ -51,9 +56,9 @@ abstract class MembershipPlan {
         System.out.println("Months: " + months);
         System.out.println("Base Monthly Fee: " + baseMonthlyFee);
         System.out.println("Auto Renew: " + autoRenew);
-        System.out.println("Monthly Net Price: " + calculateMonthlyNetPrice());
-        System.out.println("Monthly Gross Price: " + calculateMonthlyGrossPrice());
-        System.out.println("Total Net Price: " + calculateTotalNetPrice());
+        System.out.println("Monthly Net Price: " + this.calculateMonthlyNetPrice());
+        System.out.println("Monthly Gross Price: " + this.calculateMonthlyGrossPrice());
+        System.out.println("Total Net Price: " + this.calculateTotalNetPrice());
 
     }
     @Override
