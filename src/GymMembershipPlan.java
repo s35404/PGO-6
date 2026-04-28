@@ -1,6 +1,14 @@
-public class GymMembershipPlan extends MembershipPlan {
+public class GymMembershipPlan extends MembershipPlan implements Freezable{
 private int  entriesPerMonth;
 private boolean saunaAccess;
+
+public boolean isSaunaAccess() {
+    return saunaAccess;
+}
+
+public int getEntriesPerMonth() {
+    return entriesPerMonth;
+}
 
 public GymMembershipPlan(String planCode, String clientName, int months, double baseMonthlyFee,boolean autoRenew, int  entriesPerMonth,boolean saunaAccess){
     super(planCode, clientName, months, baseMonthlyFee, autoRenew);
@@ -13,7 +21,7 @@ public double calculateMonthlyNetPrice() {
     if(saunaAccess == true){
         monthlyNetPrice += 25;
     }
-    if(getAutoRenew() == true){
+    if(isAutoRenew() == true){
         monthlyNetPrice -= 10;
     }
     return monthlyNetPrice;
@@ -22,12 +30,9 @@ public double calculateMonthlyNetPrice() {
 public String getPlanType() {
     return "Gym Membership Plan";
 }
-@Override
-    public String toString() {
-    return "Gym membersip plan{ " + "Plan Code= " + planCode +
-            '\'' + ", Client name= " + clientName +
-            '\'' + ", Months= " + months +
-            '\'' + ", Base Monthly Fee= " + baseMonthlyFee +
-            '\'' + ", Auto Renew= " + autoRenew;
+
+
+public boolean canFreeze(){
+    return this.getMonths() >= 3;
 }
 }

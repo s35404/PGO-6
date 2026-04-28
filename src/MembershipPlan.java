@@ -30,7 +30,7 @@ abstract class MembershipPlan {
         return baseMonthlyFee;
     }
 
-    public boolean getAutoRenew() {
+    public boolean isAutoRenew() {
         return autoRenew;
     }
 
