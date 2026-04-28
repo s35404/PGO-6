@@ -1,4 +1,4 @@
-public class PersonalTrainingPlan extends MembershipPlan{
+public class PersonalTrainingPlan extends MembershipPlan implements Billable{
     private int sessionsPerMonth;
     private int trainerLevel;
     private boolean dietConsultationIncluded;
@@ -27,6 +27,8 @@ public class PersonalTrainingPlan extends MembershipPlan{
     public String getPlanType() {
         return "PersonalTraining Plan";
     }
+
+
     @Override
     public double calculateMonthlyNetPrice(){
         double price = this.getBaseMonthlyFee();
@@ -44,5 +46,18 @@ public class PersonalTrainingPlan extends MembershipPlan{
             price -= 15;
         }
         return price;
+    }
+    @Override
+    public String toString(){
+        return "Gym membersip plan{ " + "Plan Code= " + getPlanCode() +
+                '\'' + ", Client name= " + getClientName() +
+                '\'' + ", Months= " + getMonths() +
+                '\'' + ", Base Monthly Fee= " + getBaseMonthlyFee() +
+                '\'' + ", Auto Renew= " + isAutoRenew() +
+                '\'' + ", Sessions per month =" + sessionsPerMonth +
+                '\'' + ", Trainer level= " + trainerLevel +
+                '\'' + ", Diet consultation included= " + dietConsultationIncluded + "}";
+
+
     }
 }

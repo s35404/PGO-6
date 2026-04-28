@@ -30,8 +30,19 @@ public double calculateMonthlyNetPrice() {
 public String getPlanType() {
     return "Gym Membership Plan";
 }
+@Override
+public String toString() {
+    return "Gym membersip plan{ " + "Plan Code= " + getPlanCode() +
+            '\'' + ", Client name= " + getClientName() +
+            '\'' + ", Months= " + getMonths() +
+            '\'' + ", Base Monthly Fee= " + getBaseMonthlyFee() +
+            '\'' + ", Auto Renew= " + isAutoRenew() +
+            '\'' + "' Entries per month= " + entriesPerMonth +
+            '\'' + "' Sauna access= " + saunaAccess + "}";
+    }
 
 
+@Override
 public boolean canFreeze(){
     return this.getMonths() >= 3;
 }

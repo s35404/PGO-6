@@ -1,4 +1,4 @@
-public class OnlineCoachingPlan extends MembershipPlan implements RemoteAccess{
+public class OnlineCoachingPlan extends MembershipPlan implements RemoteAccess, Billable{
     private int videoConsultations;
     private boolean mealPlanIncluded;
     private boolean recordedLibraryAccess;
@@ -38,6 +38,20 @@ public class OnlineCoachingPlan extends MembershipPlan implements RemoteAccess{
         }
         return price;
     }
+    @Override
+    public String toString() {
+        return "Gym membersip plan{ " + "Plan Code= " + getPlanCode() +
+                '\'' + ", Client name= " + getClientName() +
+                '\'' + ", Months= " + getMonths() +
+                '\'' + ", Base Monthly Fee= " + getBaseMonthlyFee() +
+                '\'' + ", Auto Renew= " + isAutoRenew() +
+                '\'' + ", Video consultation= " + videoConsultations +
+                '\'' + ", Meal plan included= " + mealPlanIncluded +
+                '\'' + ", Recorded library access= " + recordedLibraryAccess + "}";
+
+
+    }
+
     @Override
     public boolean hasOnlineAccess() {
         return true;
